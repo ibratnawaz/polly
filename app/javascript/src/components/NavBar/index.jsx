@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import NavItem from "./NavItem";
 import authApi from "apis/auth";
 import { resetAuthTokens } from "src/apis/axios.js";
-import { getFromLocalStorage, setToLocalStorage } from "helpers/storage";
+import { getFromLocalStorage, clearLocalStorage } from "helpers/storage";
 
 const NavBar = () => {
   const userName = getFromLocalStorage("authUserName");
@@ -13,14 +13,9 @@ const NavBar = () => {
   const handleLogout = async () => {
     try {
       await authApi.logout();
-      setToLocalStorage({
-        authToken: null,
-        email: null,
-        userId: null,
-        userName: null,
-      });
+      clearLocalStorage();
       resetAuthTokens();
-      window.location.href = "/";
+      window.location.href = "/login";
     } catch (error) {
       logger.error(error);
     }
@@ -55,7 +50,7 @@ const NavBar = () => {
                 onClick={handleLogout}
                 className="inline-flex items-center px-1 pt-1 text-base font-semibold leading-5 text-bb-gray-600 text-opacity-50 transition duration-150 ease-in-out border-b-2 border-transparent hover:text-bb-gray-600 focus:outline-none focus:text-bb-gray-700 cursor-pointer"
               >
-                LogOut
+                Logout
               </a>
             )}
           </div>

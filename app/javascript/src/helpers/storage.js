@@ -5,8 +5,12 @@ const setToLocalStorage = ({ authToken, email, userId, userName }) => {
   localStorage.setItem("authUserName", userName);
 };
 
+const clearLocalStorage = () => {
+  localStorage.clear();
+};
+
 const getFromLocalStorage = key => {
   return localStorage.getItem(key);
 };
 
-export { setToLocalStorage, getFromLocalStorage };
+export { setToLocalStorage, getFromLocalStorage, clearLocalStorage };

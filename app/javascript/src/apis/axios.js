@@ -31,7 +31,7 @@ const handleSuccessResponse = response => {
 
 const handleErrorResponse = error => {
   if (error.response?.status === 401) {
-    setToLocalStorage({ authToken: null, email: null, userId: null });
+    localStorage.clear();
   }
 
   Toastr.error(
