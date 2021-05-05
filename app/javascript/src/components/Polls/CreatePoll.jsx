@@ -15,10 +15,15 @@ const CreatePoll = ({ history }) => {
   ]);
 
   const handleSubmit = async e => {
-    e.preventDefault();
-    setLoading(true);
-    await pollsApi.create({ poll: { title, options_attributes: options } });
-    setLoading(false);
+    try {
+      e.preventDefault();
+      setLoading(true);
+      await pollsApi.create({ poll: { title, options_attributes: options } });
+      setLoading(false);
+      history.push("/");
+    } catch (error) {
+      logger.error(error);
+    }
   };
 
   const handleChange = (e, idx) => {

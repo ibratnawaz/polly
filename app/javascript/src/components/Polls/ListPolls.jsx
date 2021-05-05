@@ -11,7 +11,7 @@ const ListPolls = ({ polls, history, isLoggedIn }) => {
       {polls.map(poll => (
         <li
           key={poll.id}
-          className="hover:text-purple-700 text-lg font-medium cursor-pointer"
+          className="hover:text-purple-700 text-lg font-medium cursor-pointer py-1"
           onClick={() => routeHandler(poll.id)}
         >
           {poll.title}

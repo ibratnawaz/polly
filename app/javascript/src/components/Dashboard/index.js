@@ -41,9 +41,18 @@ const Dashboard = ({ history }) => {
   if (either(isNil, isEmpty)(polls)) {
     return (
       <Container>
-        <h1 className="my-5 text-xl leading-5 text-center">
-          No polls have been created, be the first one to create the poll.🥳
-        </h1>
+        <div className="flex flex-col items-center">
+          <h1 className="my-5 text-xl leading-5 text-center">
+            No polls have been created, be the first one to create the poll.🥳
+          </h1>
+          <Link
+            to={"/polls/new"}
+            className="inline-block relative px-5 py-2 text-white text-sm font-medium bg-blue-500 border hover:shadow-md hover:bg-blue-700 leading-5 w-max rounded"
+          >
+            <i className="ri-add-line text-2xl pr-1 align-middle"></i>
+            Create New Poll
+          </Link>
+        </div>
       </Container>
     );
   }
