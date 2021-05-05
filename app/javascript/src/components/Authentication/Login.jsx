@@ -5,7 +5,7 @@ import authApi from "apis/auth";
 import { setAuthHeaders } from "apis/axios";
 import { setToLocalStorage } from "helpers/storage";
 
-const Login = () => {
+const Login = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ const Login = () => {
       });
       setAuthHeaders();
       setLoading(false);
-      window.location.href = "/";
+      history.push("/");
     } catch (error) {
       logger.error(error);
       setLoading(false);
