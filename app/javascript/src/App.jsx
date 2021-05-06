@@ -8,9 +8,10 @@ import Login from "components/Authentication/Login";
 import NavBar from "components/NavBar";
 import Dashboard from "components/Dashboard";
 import CreatePoll from "components/Polls/CreatePoll";
+import ShowPoll from "components/Polls/ShowPoll";
+import EditPoll from "components/Polls/EditPoll";
 import { setAuthHeaders, registerIntercepts } from "apis/axios";
 import { initializeLogger } from "common/logger";
-import Logger from "js-logger";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -29,7 +30,8 @@ const App = () => {
         <Route exact path="/" component={Dashboard} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/polls/:id/show" render={() => <div>Home</div>} />
+        <Route exact path="/polls/:id/show" component={ShowPoll} />
+        <Route exact path="/polls/:id/edit" component={EditPoll} />
         <Route exact path="/polls/new" component={CreatePoll} />
       </Switch>
     </Router>

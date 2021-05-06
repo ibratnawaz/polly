@@ -17,12 +17,22 @@ const Dashboard = ({ history }) => {
 
   const fetchPolls = async () => {
     try {
+      setLoading(true);
       const response = await pollsApi.list();
       setPolls(response.data.polls);
       setLoading(false);
     } catch (error) {
       logger.error(error);
       setLoading(false);
+    }
+  };
+
+  const destroyPoll = async id => {
+    try {
+      await pollsApi.destroy(id);
+      fetchPolls();
+    } catch (error) {
+      logger.error(error);
     }
   };
 
@@ -71,7 +81,12 @@ const Dashboard = ({ history }) => {
           </Link>
         )}
       </div>
-      <ListPolls polls={polls} history={history} isLoggedIn={isLoggedIn} />
+      <ListPolls
+        polls={polls}
+        history={history}
+        isLoggedIn={isLoggedIn}
+        destroyPoll={destroyPoll}
+      />
     </Container>
   );
 };

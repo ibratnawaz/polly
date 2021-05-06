@@ -1,5 +1,5 @@
 class PollsController < ApplicationController
-  before_action :authenticate_user_using_x_auth_token, except: :index
+  before_action :authenticate_user_using_x_auth_token, except: [:index, :show]
   before_action :load_poll, only: [:show, :update, :destroy]
 
   def index
@@ -8,7 +8,6 @@ class PollsController < ApplicationController
   end
 
   def show
-    authorize @poll
     render status: :ok, json: { poll: @poll.as_json(include: {
         options: {
           only: [:option, :id, :vote]
@@ -28,11 +27,20 @@ class PollsController < ApplicationController
     
   end
 
+  def update
+    if @poll.update(poll_params)
+      render status: :ok, json: {}
+    else
+      errors = @poll.errors.full_messages
+      render status: :unprocessable_entity, json: { errors: errors }
+    end
+  end
+
   def destroy
     authorize @poll
     if @poll.destroy
       render status: :ok, json: { 
-        notice: 'Successfully deleted poll.'
+        notice: 'Poll deleted successfully.'
       }
     else
       errors = @poll.errors.full_messages
@@ -48,6 +56,6 @@ class PollsController < ApplicationController
     end
     
     def poll_params
-      params.require(:poll).permit(:title, :options_attributes => [:id, :option]).merge(user_id: @current_user.id)
+      params.require(:poll).permit(:title, :options_attributes => [:id, :option, :vote]).merge(user_id: @current_user.id)
     end
 end
