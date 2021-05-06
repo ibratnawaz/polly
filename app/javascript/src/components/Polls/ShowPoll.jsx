@@ -94,14 +94,16 @@ const ShowPoll = () => {
             </li>
           ))}
         </ul>
-        <div className="flex justify-center px-6">
-          <Button
-            loading={false}
-            onClick={handleSubmit}
-            buttonText="Submit"
-            showResult={showResult}
-          />
-        </div>
+        {choice != -1 && (
+          <div className="flex justify-center px-6">
+            <Button
+              loading={false}
+              onClick={handleSubmit}
+              buttonText="Submit"
+              showResult={showResult}
+            />
+          </div>
+        )}
       </div>
     </Container>
   );

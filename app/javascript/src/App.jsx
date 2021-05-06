@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { isNil, isEmpty, either } from "ramda";
 
 import Signup from "components/Authentication/Signup";
 import Login from "components/Authentication/Login";

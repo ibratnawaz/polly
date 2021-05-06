@@ -1,5 +1,5 @@
 import React from "react";
-import { isNil } from "ramda";
+import { isNil, isEmpty, either } from "ramda";
 import { Link } from "react-router-dom";
 
 import NavItem from "./NavItem";
@@ -38,7 +38,7 @@ const NavBar = () => {
             >
               {userName}
             </span>
-            {isNil(userName) ? (
+            {either(isNil, isEmpty)(userName) ? (
               <Link
                 to="/login"
                 className="inline-flex items-center px-1 pt-1 text-base font-semibold leading-5 text-bb-gray-600 text-opacity-50 transition duration-150 ease-in-out border-b-2 border-transparent hover:text-bb-gray-600 focus:outline-none focus:text-bb-gray-700 cursor-pointer"
