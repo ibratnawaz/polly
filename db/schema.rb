@@ -15,10 +15,9 @@ ActiveRecord::Schema.define(version: 2021_05_05_092814) do
   create_table "options", force: :cascade do |t|
     t.string "option", null: false
     t.integer "vote", default: 0
-    t.integer "poll_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["poll_id"], name: "index_options_on_poll_id"
+    t.integer "poll_id"
   end
 
   create_table "polls", force: :cascade do |t|
@@ -38,7 +37,6 @@ ActiveRecord::Schema.define(version: 2021_05_05_092814) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "options", "polls"
   add_foreign_key "options", "polls", on_delete: :cascade
   add_foreign_key "polls", "users", on_delete: :cascade
 end

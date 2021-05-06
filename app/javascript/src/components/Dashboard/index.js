@@ -53,8 +53,8 @@ const Dashboard = ({ history }) => {
       <Container>
         <div className="flex flex-col items-center">
           <h1 className="my-5 text-xl leading-5 text-center">
-            No polls have been created, {isLoggedIn && "login and"} be the first
-            one to create the poll.🥳
+            No polls have been created, {!isLoggedIn && "login and"} be the
+            first one to create the poll.🥳
           </h1>
           {isLoggedIn && (
             <Link
